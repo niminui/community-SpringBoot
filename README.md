@@ -14,4 +14,4 @@
 ## 工具
 [Git](https://git-scm.com/dowload)
 
-[VP](https://www.visual-paradigm.com)
+[Visual Paradigm](https://www.visual-paradigm.com)
