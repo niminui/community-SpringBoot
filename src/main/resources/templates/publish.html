@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>叮咚社区</title>
+    <title>发布 - 叮咚社区</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
@@ -19,7 +19,7 @@
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">叮咚社区</span>
             </button>
-            <a class="navbar-brand" href="/">叮咚社区</a>
+            <a class="navbar-brand" href="#">叮咚社区</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -52,25 +52,46 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
             <hr>
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object img-rounded" src="https://avatars1.githubusercontent.com/u/56340113?v=4">
-                    </a>
+
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title">问题标题（简单扼要）</label>
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" placeholder="请输入问题......">
                 </div>
-                <div class="media-body">
-                    <h4 class="media-heading">怎么快速学会 Spring Boot 开发</h4>
-                    点击进入看 他是个酒鬼 录制的视频
+                <div class="form-group">
+                    <label for="description">问题补充（必填，请参照右侧提示）：</label>
+                    <textarea class="form-control" name="description" th:text="${description}" id="description" cols="30" rows="10"></textarea>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="tag">添加标签：</label>
+                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag" placeholder="输入标签，以“，”分隔">
+                </div>
+
+                <div class="container-fluid main">
+                    <div class="row">
+                        <div class="alert alert-danger col-lg-9 col-md-9 col-sm-12 col-xs-12" th:text="${error}"
+                             th:if="${error != null}"></div>
+                        <div class="col-lg-3 col-md-9 col-sm-12 col-xs-12">
+                            <button type="submit"
+                                    class="btn btn-success btn-publish ">
+                                发布
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
         </div>
         <div class="col lg-3 col-md-3 col-sm-12 col-xs-12">
-            <h3>热门话题</h3>
+            <h3>问题发起指南</h3>
+            * 问题标题：请使用精简的语言描述您发布的问题，不超过25个字<br>
+            * 问题补充：详细补充您的问题内容，并确保问题描述清晰直观，或提供一些相关资料<br>
+            * 选择标题：选择一个或多个合适的标签，用逗号隔开，每个标签不超过10个字<br>
         </div>
     </div>
 </div>
-
 </body>
 </html>
