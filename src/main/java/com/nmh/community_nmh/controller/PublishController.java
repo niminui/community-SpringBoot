@@ -57,17 +57,16 @@ public class PublishController {
 
         User user = null;
         Cookie[] cookies = request.getCookies();
-        if(cookies == null) {
-            return "index";
-        }
-        for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("token")) {
-                String token = cookie.getValue();
-                user = userMapper.findByToken(token);
-                if(user != null) {
-                    request.getSession().setAttribute("user",user);
+        if(cookies != null && cookies.length != 0) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    user = userMapper.findByToken(token);
+                    if(user != null) {
+                        request.getSession().setAttribute("user",user);
+                    }
+                    break;
                 }
-                break;
             }
         }
 

@@ -1,10 +1,11 @@
 package com.nmh.community_nmh.mapper;
 
+import com.nmh.community_nmh.model.Question;
 import com.nmh.community_nmh.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
+
+import java.util.List;
 
 /**
  * @author niminui
@@ -18,4 +19,10 @@ public interface UserMapper {
 
     @Select("select * from user where token = #{token}")
     User findByToken(@Param("token") String token);
+
+    @Select("select * from user where id = #{id}")
+    User findById(@Param("id") Integer id);
+
+    @Select("select * from user where id = #{id}")
+    List<User> list(Integer id);
 }

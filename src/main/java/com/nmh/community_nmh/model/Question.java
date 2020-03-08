@@ -19,4 +19,6 @@ public class Question {
     private Integer commentCount;
     private Integer likeCount;
 
+    private User user;
+
 }
