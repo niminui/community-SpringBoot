@@ -20,10 +20,18 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    @Autowired
+    @Autowired(required = false)
     private QuestionMapper questionMapper;
 
     public List<Question> list() {
         return questionMapper.list();
+    }
+
+    public List<Question> listOfCreator(Integer userId) {
+        return questionMapper.listOfCreator(userId);
+    }
+
+    public Question getById(Integer id) {
+        return questionMapper.getById(id);
     }
 }

@@ -20,5 +20,4 @@ public class Question {
     private Integer likeCount;
 
     private User user;
-
 }

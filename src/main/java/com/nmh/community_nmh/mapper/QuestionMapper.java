@@ -19,7 +19,7 @@ public interface QuestionMapper {
     void create(Question question);
 
     @Select("select * from question")
-    @Results({
+    @Results(id = "questionFromUser", value = {
             @Result(id = true,property = "id",column = "id"),
             @Result(property = "creator",column = "creator"),
             @Result(property = "title",column = "title"),
@@ -31,8 +31,15 @@ public interface QuestionMapper {
             @Result(property = "commentCount",column = "comment_count"),
             @Result(property = "likeCount",column = "like_count"),
             @Result(property = "user",column = "creator",
-                    one = @One(select = "com.nmh.community_nmh.mapper.UserMapper.list")),
+                    one = @One(select = "com.nmh.community_nmh.mapper.UserMapper.getUser")),
     })
     List<Question> list();
 
+    @Select("select * from question where creator = #{userId}")
+    @ResultMap(value = "questionFromUser")
+    List<Question> listOfCreator(@Param("userId") Integer userId);
+
+    @Select("select * from question where id = #{id}")
+    @ResultMap(value = "questionFromUser")
+    Question getById(@Param("id") Integer id);
 }

@@ -24,5 +24,11 @@ public interface UserMapper {
     User findById(@Param("id") Integer id);
 
     @Select("select * from user where id = #{id}")
-    List<User> list(Integer id);
+    User getUser(@Param("id") Integer id);
+
+    @Insert("update user set name = #{name}, token = #{token}, gmt_modified = #{gmtModified}, avatar_url = #{avatarUrl} where id = #{id}")
+    void update(User dbUser);
+
+    @Select("select * from user where account_ID = #{accountId}")
+    User getByAccountId(String accountId);
 }
