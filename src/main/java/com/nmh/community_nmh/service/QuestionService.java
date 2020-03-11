@@ -1,16 +1,10 @@
 package com.nmh.community_nmh.service;
 
-import com.nmh.community_nmh.dto.PaginationDTO;
-import com.nmh.community_nmh.dto.QuestionDTO;
 import com.nmh.community_nmh.mapper.QuestionMapper;
-import com.nmh.community_nmh.mapper.UserMapper;
 import com.nmh.community_nmh.model.Question;
-import com.nmh.community_nmh.model.User;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,18 +14,31 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    @Autowired(required = false)
+    @Autowired
     private QuestionMapper questionMapper;
 
     public List<Question> list() {
-        return questionMapper.list();
+        return questionMapper.findQuestionWithUser();
     }
 
     public List<Question> listOfCreator(Integer userId) {
-        return questionMapper.listOfCreator(userId);
+        return questionMapper.findQuestionWithUserById(userId);
     }
 
-    public Question getById(Integer id) {
-        return questionMapper.getById(id);
+    public Question getById(Integer QId) {
+        return questionMapper.getOneQuestionWithUserByQId(QId);
+    }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null) {
+            //创建
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.insert(question);
+        } else {
+            //更新
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.updateByPrimaryKeySelective(question);
+        }
     }
 }

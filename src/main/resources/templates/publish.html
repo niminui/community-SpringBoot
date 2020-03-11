@@ -4,11 +4,11 @@
     <title>发布 - 叮咚社区</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/community.css">
-    <script rel="application/javascript" src="js/jquery-3.3.1.min.js"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/community.css">
+    <script rel="/application/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
 
@@ -20,6 +20,7 @@
             <hr>
 
             <form action="/publish" method="post">
+                <input type="hidden"name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）</label>
                     <input type="text" class="form-control" th:value="${title}" id="title" name="title" placeholder="请输入问题......">

@@ -2,7 +2,6 @@ package com.nmh.community_nmh.controller;
 
 import com.nmh.community_nmh.dto.AccessTokenDTO;
 import com.nmh.community_nmh.dto.GithubUser;
-import com.nmh.community_nmh.mapper.UserMapper;
 import com.nmh.community_nmh.model.User;
 import com.nmh.community_nmh.provider.GithubProvider;
 import com.nmh.community_nmh.service.UserService;
