@@ -23,6 +23,8 @@ public class QuestionController {
     public String question(@PathVariable(name = "id")Integer id,
                            Model model) {
         Question question = questionService.getById(id);
+        //累加阅读数
+        questionService.incView(id);
         model.addAttribute("question",question);
         return "question";
     }
