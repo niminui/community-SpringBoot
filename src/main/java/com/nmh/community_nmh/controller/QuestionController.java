@@ -1,6 +1,5 @@
 package com.nmh.community_nmh.controller;
 
-import com.nmh.community_nmh.mapper.QuestionMapper;
 import com.nmh.community_nmh.model.Question;
 import com.nmh.community_nmh.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

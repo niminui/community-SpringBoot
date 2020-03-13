@@ -5,7 +5,6 @@ import com.nmh.community_nmh.exception.CustomizeException;
 import com.nmh.community_nmh.mapper.QuestionExtMapper;
 import com.nmh.community_nmh.mapper.QuestionMapper;
 import com.nmh.community_nmh.model.Question;
-import com.nmh.community_nmh.model.QuestionExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,15 +24,15 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     public List<Question> list() {
-        return questionMapper.findQuestionWithUser();
+        return questionExtMapper.findQuestionWithUser();
     }
 
     public List<Question> listOfCreator(Integer userId) {
-        return questionMapper.findQuestionWithUserById(userId);
+        return questionExtMapper.findQuestionWithUserById(userId);
     }
 
     public Question getById(Integer QId) {
-        Question question = questionMapper.getOneQuestionWithUserByQId(QId);
+        Question question = questionExtMapper.getOneQuestionWithUserByQId(QId);
         if(question ==null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
@@ -45,7 +44,7 @@ public class QuestionService {
             //创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.insert(question);
+            questionMapper.insertSelective(question);
         } else {
             //更新
             question.setGmtModified(question.getGmtCreate());

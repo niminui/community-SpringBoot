@@ -18,6 +18,43 @@
     <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount" />
     <result column="TAG" jdbcType="VARCHAR" property="tag" />
   </resultMap>
+  <resultMap id="questionWithUserMap" type="com.nmh.community_nmh.model.Question">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+    <result column="GMT_CREATE" jdbcType="BIGINT" property="gmtCreate" />
+    <result column="GMT_MODIFIED" jdbcType="BIGINT" property="gmtModified" />
+    <result column="CREATOR" jdbcType="INTEGER" property="creator" />
+    <result column="COMMENT_COUNT" jdbcType="INTEGER" property="commentCount" />
+    <result column="VIEW_COUNT" jdbcType="INTEGER" property="viewCount" />
+    <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount" />
+    <result column="TAG" jdbcType="VARCHAR" property="tag" />
+    <association property="user" javaType="com.nmh.community_nmh.model.User">
+      <id column="ID" jdbcType="INTEGER" property="id" />
+      <result column="ACCOUNT_ID" jdbcType="VARCHAR" property="accountId" />
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+      <result column="TOKEN" jdbcType="VARCHAR" property="token" />
+      <result column="GMT_CREATE" jdbcType="BIGINT" property="gmtCreate" />
+      <result column="GMT_MODIFIED" jdbcType="BIGINT" property="gmtModified" />
+      <result column="BIO" jdbcType="VARCHAR" property="bio" />
+      <result column="AVATAR_URL" jdbcType="VARCHAR" property="avatarUrl" />
+    </association>
+  </resultMap>
+
+  <select id="findQuestionWithUser" parameterType="Question" resultMap="questionWithUserMap">
+    select * from question q
+    left join `user` u on q.`creator` = u.`id`
+  </select>
+  <select id="findQuestionWithUserById" parameterType="Question" resultMap="questionWithUserMap">
+    select * from question q
+    left join `user` u on q.`creator` = u.`id`
+    where q.creator=#{userId}
+  </select>
+  <select id="getOneQuestionWithUserByQId" parameterType="Question" resultMap="questionWithUserMap">
+    select * from question q
+    left join `user` u on q.`creator` = u.`id`
+    where q.id=#{QId}
+  </select>
 
   <update id="incView" parameterType="com.nmh.community_nmh.model.Question">
     update QUESTION
