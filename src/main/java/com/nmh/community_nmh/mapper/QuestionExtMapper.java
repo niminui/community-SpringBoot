@@ -5,7 +5,15 @@ import com.nmh.community_nmh.model.Question;
 import java.util.List;
 
 public interface QuestionExtMapper {
+    /**
+     * 阅读数
+     */
     int incView(Question question);
+
+    /**
+     * 评论数
+     */
+    int incCommentCount(Question question);
 
     /**
      * 查询所有问题，同时查询每一个问题的发表者user
