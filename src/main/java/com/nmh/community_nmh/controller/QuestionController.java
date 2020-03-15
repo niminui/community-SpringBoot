@@ -1,6 +1,7 @@
 package com.nmh.community_nmh.controller;
 
 import com.nmh.community_nmh.dto.CommentDTO;
+import com.nmh.community_nmh.enums.CommentTypeEnum;
 import com.nmh.community_nmh.model.Question;
 import com.nmh.community_nmh.service.CommentService;
 import com.nmh.community_nmh.service.QuestionService;
@@ -29,7 +30,7 @@ public class QuestionController {
     public String question(@PathVariable(name = "id")Integer id, Model model) {
         Question question = questionService.getById(id);
 
-        List<CommentDTO> comments = commentService.listByQuestionId(id);
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
         //累加阅读数
         questionService.incView(id);
