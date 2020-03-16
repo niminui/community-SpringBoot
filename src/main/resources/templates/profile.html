@@ -18,17 +18,24 @@
             <hr>
             <div class="media" th:each="question : ${questions}">
                 <div class="media-left">
-                    <a href="#">
+                    <a th:href="'/question/'+${question.id}">
                         <img class="media-object img-rounded"
                              th:src="${question.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <h4 class="media-heading">
+                        <a th:href="'/question/'+${question.id}" th:text="${question.title}"></a>
+                    </h4>
                     <span th:text="${question.description}"></span><br>
-                    <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 ·
+                    <span class="text-desc">
+                        <span th:text="${question.commentCount}"></span> 个回复 ·
                         <span th:text="${question.viewCount}"></span> 次浏览 ·
-                        <span th:text="${#dates.format(question.gmtCreate,'yyyy年MM月dd日 HH:mm')}"></span>
+                        <span th:text="${#dates.format(question.gmtCreate,'yyyy年MM月dd日 HH:mm')}"></span> ·
+                        <a th:href="@{'/publish/'+${question.id}}" class="community-menu"
+                           th:if="${session.user != null && session.user.id == question.creator}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
+                    </a>
                     </span>
                 </div>
             </div>
