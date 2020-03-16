@@ -25,7 +25,7 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable("id")Integer id,
+    public String edit(@PathVariable("id")Long id,
                        Model model) {
         Question question = questionService.getById(id);
         model.addAttribute("title",question.getTitle());
@@ -44,22 +44,22 @@ public class PublishController {
     public String doPublish(@RequestParam(value = "title",required = false)String title,
                             @RequestParam(value = "description",required = false)String description,
                             @RequestParam(value = "tag",required = false)String tag,
-                            @RequestParam(value = "id",required = false)Integer id,
+                            @RequestParam(value = "id",required = false)Long id,
                             HttpServletRequest request,
                             Model model) {
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
 
-        if(title == null || title.equals("")) {
+        if(title == null || title.equals("") || title.replaceAll(" ","").equals("")) {
             model.addAttribute("error","标题不能为空！");
             return "publish";
         }
-        if(description == null || description.equals("")) {
+        if(description == null || description.equals("") || description.replaceAll(" ","").equals("")) {
             model.addAttribute("error","问题补充不能为空！");
             return "publish";
         }
-        if(tag == null || tag.equals("")) {
+        if(tag == null || tag.equals("") || tag.replaceAll(" ","").equals("")) {
             model.addAttribute("error","标签不能为空！");
             return "publish";
         }
@@ -74,7 +74,7 @@ public class PublishController {
         Question question = new Question();
         question.setTitle(title);
         question.setDescription(description);
-        question.setTag(tag);
+        question.setTag(tag.replaceAll("，",","));
         question.setCreator(user.getId());
         question.setId(id);
 

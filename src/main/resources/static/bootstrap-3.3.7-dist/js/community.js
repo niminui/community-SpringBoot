@@ -90,7 +90,7 @@ function collapseComments(e) {
                         "class":"menu"
                     }).append($("<span/>", {
                         "class":"pull-right",
-                        "html":comment.gmtCreate
+                        "html":moment(comment.gmtCreate).format('YYYY年MM月DD日 HH:mm:ss')
                     })));
 
                     var mediaElement = $("<div/>", {

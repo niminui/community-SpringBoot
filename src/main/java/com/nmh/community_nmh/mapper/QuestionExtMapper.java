@@ -23,10 +23,12 @@ public interface QuestionExtMapper {
     /**
      * 根据用户id查询该id发布的的所有问题
      */
-    List<Question> findQuestionWithUserById(Integer userId);
+    List<Question> findQuestionWithUserById(Long userId);
 
     /**
      * 根据问题id查询单个问题并查询出所属的用户
      */
-    Question getOneQuestionWithUserByQId(Integer QId);
+    Question getOneQuestionWithUserByQId(Long QId);
+
+    List<Question> selectRelated(Question question);
 }

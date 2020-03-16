@@ -7,7 +7,9 @@ import com.nmh.community_nmh.mapper.QuestionMapper;
 import com.nmh.community_nmh.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,11 +29,11 @@ public class QuestionService {
         return questionExtMapper.findQuestionWithUser();
     }
 
-    public List<Question> listOfCreator(Integer userId) {
+    public List<Question> listOfCreator(Long userId) {
         return questionExtMapper.findQuestionWithUserById(userId);
     }
 
-    public Question getById(Integer QId) {
+    public Question getById(Long QId) {
         Question question = questionExtMapper.getOneQuestionWithUserByQId(QId);
         if(question ==null) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -58,10 +60,19 @@ public class QuestionService {
         }
     }
 
-    public void incView(Integer id) {
+    public void incView(Long id) {
         Question question = new Question();
         question.setId(id);
         question.setViewCount(1);
         questionExtMapper.incView(question);
+    }
+
+    public List<Question> selectRelated(Question question) {
+        if(StringUtils.isEmpty(question.getTag())) {
+            return new ArrayList<>();
+        }
+        String tempTag = question.getTag().replaceAll(",", "|");
+        question.setTag(tempTag);
+        return questionExtMapper.selectRelated(question);
     }
 }
