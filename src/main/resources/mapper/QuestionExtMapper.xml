@@ -50,6 +50,7 @@
     select * from question q
     left join `user` u on q.`creator` = u.`id`
     where q.creator=#{userId}
+    order by q.gmt_create desc
   </select>
   <select id="getOneQuestionWithUserByQId" parameterType="Question" resultMap="questionWithUserMap">
     select * from question q

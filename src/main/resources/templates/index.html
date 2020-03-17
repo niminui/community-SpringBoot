@@ -4,11 +4,11 @@
     <title>叮咚社区</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/community.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css" type="text/css">
     <script src="js/jquery-3.3.1.min.js" type="application/javascript"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 
 <script type="application/javascript">
@@ -39,7 +39,15 @@
                     <h4 class="media-heading" >
                         <a th:href="'question/'+${question.id}" th:text="${question.title}"></a>
                     </h4>
-                    <span th:text="${question.description}"></span><br>
+                    <!--显示描述信息-->
+                    <!--<div th:if="${question.description.length() < 75}">
+                        <span th:text="${question.description}"></span>
+                        <br>
+                    </div>
+                    <div th:if="${question.description.length() >= 75}">
+                        <span th:text="${question.description.substring(0,75)}+'......'"></span>
+                        <br>
+                    </div>-->
                     <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 ·
                         <span th:text="${question.viewCount}"></span> 次浏览 ·
                         <span th:text="${#dates.format(question.gmtCreate,'yyyy年MM月dd日 HH:mm')}"></span>
