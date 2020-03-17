@@ -3,6 +3,7 @@ package com.nmh.community_nmh.interceptor;
 import com.nmh.community_nmh.mapper.UserMapper;
 import com.nmh.community_nmh.model.User;
 import com.nmh.community_nmh.model.UserExample;
+import com.nmh.community_nmh.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,8 +21,11 @@ import java.util.List;
 @Component
 public class SessionInterceptor implements HandlerInterceptor {
 
-    @Autowired(required = false)
+    @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -36,6 +40,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                     List<User> users = userMapper.selectByExample(userExample);
                     if (users != null && users.size() != 0) {
                         request.getSession().setAttribute("user", users.get(0));
+                        Long unreadCount = notificationService.unreadCount(users.get(0).getId());
+                        request.getSession().setAttribute("unreadCount",unreadCount);
                     }
                     break;
                 }

@@ -2,8 +2,10 @@ package com.nmh.community_nmh.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.nmh.community_nmh.dto.NotificationDTO;
 import com.nmh.community_nmh.model.Question;
 import com.nmh.community_nmh.model.User;
+import com.nmh.community_nmh.service.NotificationService;
 import com.nmh.community_nmh.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,10 @@ import java.util.List;
 public class ProfileController {
 
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,
@@ -36,19 +41,24 @@ public class ProfileController {
             return "redirect:/";
         }
         if ("questions".equals(action)) {
+            PageHelper.startPage(page,size);
+            List<Question> questions = questionService.listOfCreator(user.getId());
+            PageInfo<Question> pageInfo = new PageInfo<>(questions,5);
+
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
+            model.addAttribute("questions",questions);
+            model.addAttribute("pageInfo",pageInfo);
         } else if ("replies".equals(action)) {
+            List<NotificationDTO> notificationDTOS = notificationService.list(user.getId());
+            PageInfo<NotificationDTO> pageInfo = new PageInfo<>(notificationDTOS,5);
+            PageHelper.startPage(page,size);
+
             model.addAttribute("section", "replies");
             model.addAttribute("sectionName", "我的最新回复");
+            model.addAttribute("notificationDTOS",notificationDTOS);
+            model.addAttribute("pageInfo",pageInfo);
         }
-
-        PageHelper.startPage(page,size);
-        List<Question> questions = questionService.listOfCreator(user.getId());
-        PageInfo<Question> pageInfo = new PageInfo<>(questions,5);
-        model.addAttribute("questions",questions);
-        model.addAttribute("pageInfo",pageInfo);
-
         return "profile";
     }
 
