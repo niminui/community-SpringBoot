@@ -1,5 +1,7 @@
 ## 社区
-基于Spring Boot的论坛项目
+这是一个基于SpringBoot框架的论坛项目，适合萌新学习，也欢迎大佬指点。
+
+This is a forum project based on the SpringBoot framework,suitable for beginners,and also welcome guidance from experienced technical people.
 
 ## 资料
 [Spring文档](https://spring.io/guides)
