@@ -20,7 +20,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    @Autowired(required = false)
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired

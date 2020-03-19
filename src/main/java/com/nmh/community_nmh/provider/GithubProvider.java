@@ -26,7 +26,8 @@ public class GithubProvider {
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            return Objects.requireNonNull(response.body()).string().split("&")[0].split("=")[1];
+            String res = response.body().string().split("&")[0].split("=")[1];
+            return res;
         } catch (Exception e) {
             e.printStackTrace();
         }

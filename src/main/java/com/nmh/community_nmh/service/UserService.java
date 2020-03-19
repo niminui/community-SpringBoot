@@ -23,13 +23,11 @@ public class UserService {
         userExample.createCriteria()
                 .andAccountIdEqualTo(user.getAccountId());
         List<User> users = userMapper.selectByExample(userExample);
-        if(users == null && users.size() != 0) {
+        if(users.size() == 0) {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
-            //插入
         } else {
-            //更新
             User updateUser = new User();
             updateUser.setGmtModified(System.currentTimeMillis());
             updateUser.setAvatarUrl(user.getAvatarUrl());

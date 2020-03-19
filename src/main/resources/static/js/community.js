@@ -27,6 +27,7 @@ function comment2Target(targetId, type, content) {
                 window.location.reload();
             } else {
                 if (response.code === 2003) {
+                    debugger;
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
                         window.open("https://github.com/login/oauth/authorize?client_id=d4001ebfaf6e13597f03&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
@@ -36,6 +37,7 @@ function comment2Target(targetId, type, content) {
                     alert(response.message);
                 }
             }
+            window.location.reload();
         },
         dataType: "json"
     });

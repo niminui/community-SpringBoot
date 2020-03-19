@@ -23,10 +23,11 @@
             <hr>
 
             <form action="/publish" method="post">
-                <input type="hidden"name="id" th:value="${id}">
+                <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）</label>
-                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" autocomplete="off" placeholder="请输入问题......">
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title"
+                           autocomplete="off" placeholder="请输入问题......">
                 </div>
                 <div class="form-group" id="question-editor">
                     <label for="description">问题补充（必填，请参照右侧提示）：</label>
@@ -38,14 +39,17 @@
                     </textarea>
                 </div>
                 <script type="text/javascript">
-                    $(function() {
+                    $(function () {
                         var editor = editormd("question-editor", {
-                            width  : "100%",
-                            height : 350,
-                            path   : "/js/lib/",
-                            delay  : 0,
-                            watch  : false,
-                            placeholder : "请输入问题描述~"
+                            width: "100%",
+                            height: 500,
+                            path: "/js/lib/",
+                            delay: 0,
+                            watch: false,
+                            placeholder: "请输入问题描述~",
+                            imageUpload: true,
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL: "/file/upload",
                         });
                     });
                 </script>
@@ -59,8 +63,10 @@
                     <div id="select_tag" class="publish-tag-tab">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" th:each="selectCategory,selectCategoryStat:${tags}" th:class="${selectCategoryStat.first?'active':''}">
-                                <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab" data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                            <li role="presentation" th:each="selectCategory,selectCategoryStat:${tags}"
+                                th:class="${selectCategoryStat.first?'active':''}">
+                                <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab"
+                                   data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
                             </li>
                         </ul>
 
@@ -72,7 +78,8 @@
                             >
                                 <span>
                                     <span class="label label-info" th:each="selectTag:${selectCategory.tags}">
-                                        <span class="glyphicon glyphicon-tags" onclick="selectTag(this)" th:data-tag="${selectTag}"
+                                        <span class="glyphicon glyphicon-tags" onclick="selectTag(this)"
+                                              th:data-tag="${selectTag}"
                                               th:text="${' '+selectTag}">
                                         </span>
                                     </span>
