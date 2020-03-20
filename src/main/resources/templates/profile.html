@@ -32,15 +32,7 @@
                         <h4 class="media-heading">
                             <a th:href="'/question/'+${question.id}" th:text="${question.title}"></a>
                         </h4>
-                        <!--显示描述信息-->
-                        <!--<div th:if="${question.description.length() < 75}">
-                            <span th:text="${question.description}"></span>
-                            <br>
-                        </div>
-                        <div th:if="${question.description.length() >= 75}">
-                            <span th:text="${question.description.substring(0,75)}+'......'"></span>
-                            <br>
-                        </div>-->
+
                         <span class="text-desc">
                         <span th:text="${question.commentCount}"></span> 个回复 ·
                         <span th:text="${question.viewCount}"></span> 次浏览 ·

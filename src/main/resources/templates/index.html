@@ -26,7 +26,7 @@
 <div th:replace="~{navigation :: navi}"></div>
 
 <!--消息列表-->
-<div th:if="${questions.size() == 0}">
+<div th:if="${questions == null || questions.size() == 0}">
     <div class="jumbotron">
         <h3>你所查找的问题不见了，换一个关键词试试？</h3>
         <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
