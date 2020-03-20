@@ -5,6 +5,7 @@ import com.nmh.community_nmh.dto.GithubUser;
 import com.nmh.community_nmh.model.User;
 import com.nmh.community_nmh.provider.GithubProvider;
 import com.nmh.community_nmh.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.UUID;
  * @date 2020/3/4 23:05
  */
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -63,6 +65,7 @@ public class AuthorizeController {
             return "redirect:/";
         } else {
             //登录失败，重新登录
+            log.error("callback get github error, {}",githubUser);
             return "redirect:/";
         }
     }

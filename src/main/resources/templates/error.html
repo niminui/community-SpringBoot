@@ -11,12 +11,18 @@
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
+<!--导航栏-->
 <div th:replace="~{navigation :: navi}"></div>
+
+<!--错误信息-->
 <div class="jumbotron">
     <h1>出错了...</h1>
-    <p th:text="${message}">服务太热啦，要不然稍等下再来试试</p>
+    <p th:text="${message}"></p>
     <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
 </div>
+
+<!--底部信息-->
+<div th:replace="~{footer :: foot}"></div>
 
 </body>
 </html>

@@ -7,6 +7,7 @@ import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
 import com.nmh.community_nmh.exception.CustomizeErrorCode;
 import com.nmh.community_nmh.exception.CustomizeException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,6 +22,7 @@ import java.util.UUID;
  * @date 2020/3/19 11:22
  */
 @Service
+@Slf4j
 public class ALiYunProvider {
 
     @Value("${aliyun.afile.endpoint}")
@@ -75,10 +77,12 @@ public class ALiYunProvider {
                 return ossClient.generatePresignedUrl(bucketName,
                         new StringBuilder(folder).append(generatedFileName).toString(), expiration);
             } else {
+                log.error("ALiYun upload 上传图片失败！");
                 throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            log.error("ALiYun upload 上传图片失败！");
             throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         } finally {
             ossClient.shutdown();

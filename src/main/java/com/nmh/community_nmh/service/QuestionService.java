@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author niminui
@@ -25,7 +27,12 @@ public class QuestionService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
-    public List<Question> list() {
+    public List<Question> list(String search) {
+        if(!StringUtils.isEmpty(search)) {
+            String[] tags = search.split(" ");
+            search = String.join("|", tags);
+            return questionExtMapper.findQuestionWithUserBySearch(search);
+        }
         return questionExtMapper.findQuestionWithUser();
     }
 
@@ -52,7 +59,7 @@ public class QuestionService {
             questionMapper.insertSelective(question);
         } else {
             //更新
-            question.setGmtModified(question.getGmtCreate());
+            question.setGmtModified(System.currentTimeMillis());
             int updated = questionMapper.updateByPrimaryKeySelective(question);
             if(updated != 1) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);

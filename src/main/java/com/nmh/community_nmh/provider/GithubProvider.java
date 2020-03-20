@@ -3,6 +3,7 @@ package com.nmh.community_nmh.provider;
 import com.alibaba.fastjson.JSON;
 import com.nmh.community_nmh.dto.AccessTokenDTO;
 import com.nmh.community_nmh.dto.GithubUser;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @date 2020/3/4 23:12
  */
 @Component
+@Slf4j
 public class GithubProvider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
@@ -29,6 +31,7 @@ public class GithubProvider {
             String res = response.body().string().split("&")[0].split("=")[1];
             return res;
         } catch (Exception e) {
+            log.error("GithubProvider error");
             e.printStackTrace();
         }
         return null;
@@ -44,6 +47,7 @@ public class GithubProvider {
             String string = response.body().string();
             return JSON.parseObject(string, GithubUser.class);
         } catch (IOException e) {
+            log.error("GithubProvider error");
             e.printStackTrace();
         }
         return null;

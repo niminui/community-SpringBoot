@@ -16,7 +16,10 @@
     <script src="/js/lib/prettify.min.js" type="application/javascript"></script>
 </head>
 <body>
+<!--导航栏-->
 <div th:replace="~{navigation :: navi}"></div>
+
+<!--问题详情页面-->
 <div class="container-fluid main profile">
     <div class="row">
         <!--左边主要内容-->
@@ -173,6 +176,9 @@
         </div>
     </div>
 </div>
+
+<!--底部信息-->
+<div th:replace="~{footer :: foot}"></div>
 
 </body>
 </html>

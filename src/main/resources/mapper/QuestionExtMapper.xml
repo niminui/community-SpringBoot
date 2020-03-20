@@ -44,13 +44,13 @@
   <select id="findQuestionWithUser" parameterType="Question" resultMap="questionWithUserMap">
     select * from question q
     left join `user` u on q.`creator` = u.`id`
-    order by q.gmt_create desc
+    order by q.gmt_modified desc
   </select>
   <select id="findQuestionWithUserById" parameterType="Question" resultMap="questionWithUserMap">
     select * from question q
     left join `user` u on q.`creator` = u.`id`
     where q.creator=#{userId}
-    order by q.gmt_create desc
+    order by q.gmt_modified desc
   </select>
   <select id="getOneQuestionWithUserByQId" parameterType="Question" resultMap="questionWithUserMap">
     select * from question q
@@ -59,11 +59,18 @@
   </select>
   
   <select id="selectRelated" parameterType="com.nmh.community_nmh.model.Question" resultMap="BaseResultMap">
-    select * from question where id != #{id}
+    select * from question
+    where id != #{id}
     and tag regexp #{tag};
   </select>
+    <select id="findQuestionWithUserBySearch" resultType="com.nmh.community_nmh.model.Question" resultMap="questionWithUserMap">
+      select * from question q
+      left join `user` u on q.`creator` = u.`id`
+      where q.tag regexp #{search} or q.title regexp #{search}
+      order by gmt_modified desc
+    </select>
 
-  <update id="incView" parameterType="com.nmh.community_nmh.model.Question">
+    <update id="incView" parameterType="com.nmh.community_nmh.model.Question">
     update QUESTION
     set VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER}
     where id = #{id}

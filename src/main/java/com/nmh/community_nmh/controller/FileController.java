@@ -2,6 +2,7 @@ package com.nmh.community_nmh.controller;
 
 import com.nmh.community_nmh.dto.FileDTO;
 import com.nmh.community_nmh.provider.ALiYunProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.Objects;
  * @date 2020/3/18 12:14
  */
 @Controller
+@Slf4j
 public class FileController {
 
     @Autowired
@@ -36,6 +38,7 @@ public class FileController {
             fileDTO.setSuccess(1);
             fileDTO.setUrl(fileName);
         } catch (IOException e) {
+            log.error("oss上传图片失败！");
             e.printStackTrace();
         }
         return fileDTO;

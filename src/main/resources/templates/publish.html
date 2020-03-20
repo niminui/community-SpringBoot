@@ -14,8 +14,10 @@
     <script src="/js/editormd.min.js" type="application/javascript"></script>
 </head>
 <body>
-
+<!--导航栏-->
 <div th:replace="~{navigation :: navi}"></div>
+
+<!--问题编辑页面-->
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -118,5 +120,8 @@
         </div>
     </div>
 </div>
+
+<!--底部信息-->
+<div th:replace="~{footer :: foot}"></div>
 </body>
 </html>

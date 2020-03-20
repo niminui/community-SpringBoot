@@ -29,12 +29,14 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                        @RequestParam(name = "size", defaultValue = "5") Integer size,
+                        @RequestParam(name = "search", required = false) String search) {
         PageHelper.startPage(page, size);
-        List<Question> questions = questionService.list();
+        List<Question> questions = questionService.list(search);
         PageInfo<Question> pageInfo = new PageInfo<>(questions,5);
         model.addAttribute("questions", questions);
         model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("search",search);
 
         return "index";
     }

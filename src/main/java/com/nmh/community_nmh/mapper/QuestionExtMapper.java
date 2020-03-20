@@ -31,4 +31,6 @@ public interface QuestionExtMapper {
     Question getOneQuestionWithUserByQId(Long QId);
 
     List<Question> selectRelated(Question question);
+
+    List<Question> findQuestionWithUserBySearch(String search);
 }
