@@ -1,1 +1,1 @@
-alter table comment alter column parent_id int not null;
+alter table comment modify parent_id int not null;
