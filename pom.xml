@@ -117,7 +117,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.3.0</version>
                 <configuration>
-                    <url>jdbc:mysql://172.17.74.136:3306/dingdong</url>
+                    <url>jdbc:mysql://rm-2ze38efs8lwo659k2uo.mysql.rds.aliyuncs.com:3306/dingdong</url>
                     <user>root</user>
                     <password>NMh199848720+--</password>
                 </configuration>
