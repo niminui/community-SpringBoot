@@ -41,11 +41,20 @@
             <version>1.2.62</version>
         </dependency>
 
+        <!--H2-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.199</version>
         </dependency>
+
+        <!--MySQL-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -108,11 +117,16 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.3.0</version>
                 <configuration>
-                    <url>jdbc:h2:~/community</url>
+                    <url>jdbc:mysql://172.17.74.136:3306/dingdong</url>
                     <user>root</user>
-                    <password>root</password>
+                    <password>NMh199848720+--</password>
                 </configuration>
                 <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.47</version>
+                    </dependency>
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
