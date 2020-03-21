@@ -132,7 +132,7 @@
                 <version>6.3.0</version>
                 <configuration>
                     <url>${db.url}</url>
-                    <user>r${db.user}</user>
+                    <user>${db.user}</user>
                     <password>${db.password}</password>
                 </configuration>
                 <dependencies>
