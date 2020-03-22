@@ -20,7 +20,10 @@ public class GithubProvider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(25, TimeUnit.SECONDS)
+                .readTimeout(25,TimeUnit.SECONDS)
+                .build();
 
         RequestBody body = RequestBody.create(JSON.toJSONString(accessTokenDTO),mediaType);
         Request request = new Request.Builder()
